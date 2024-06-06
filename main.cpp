@@ -182,10 +182,37 @@ int main() {
     //std::cout << "Pokemon Speed: " << randomPokemon.speed << std::endl;
     //std::cout << "Pokemon Total Score: " << randomPokemon.totalScore() << std::endl;
 
-    // Battle
-    // Randomly select two Pokemon
-    Pokemon pokemon1 = allPokemon[0];
-    Pokemon pokemon2 = allPokemon[1];
+// Ask the user for their selection method
+std::cout << "Enter 1 for random selection, 2 for manual selection: ";
+int selectionMethod;
+std::cin >> selectionMethod;
+
+Pokemon pokemon1, pokemon2;
+
+if (selectionMethod == 1) {
+    // Random selection
+    int randomIndex1 = distr(gen);
+    int randomIndex2 = distr(gen);
+    while (randomIndex1 == randomIndex2) { // Ensure two different Pokemon are selected
+        randomIndex2 = distr(gen);
+    }
+    pokemon1 = allPokemon[randomIndex1];
+    pokemon2 = allPokemon[randomIndex2];
+} else if (selectionMethod == 2) {
+    // Manual selection
+    std::cout << "Enter the number of the first Pokemon: ";
+    int index1;
+    std::cin >> index1;
+    std::cout << "Enter the number of the second Pokemon: ";
+    int index2;
+    std::cin >> index2;
+    pokemon1 = allPokemon[index1 - 1]; // Subtract 1 because vector indices start at 0
+    pokemon2 = allPokemon[index2 - 1];
+}
+
+// Print out the two Pokemon
+std::cout << "Pokemon 1: " << pokemon1.name << std::endl;
+std::cout << "Pokemon 2: " << pokemon2.name << std::endl;
 
     // Print out the two Pokemon
     std::cout << "Pokemon 1: " << pokemon1.name << std::endl;
